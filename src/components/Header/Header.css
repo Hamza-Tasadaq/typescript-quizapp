@@ -1,0 +1,12 @@
+/* Styling body */
+body {
+  background-color: #1f2833;
+}
+/* Styling Header */
+.h1 {
+  color: #66fcf1;
+  margin-top: 10px;
+  font-family: "Ranchers", cursive;
+  font-weight: bold;
+  font-size: 7vw;
+}

@@ -1,0 +1,39 @@
+.h2 {
+  color: #ffffff;
+}
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  color: #c5c6c7;
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #66fcf1;
+  border: none;
+  color: #1f2833;
+}
+.quiz-section {
+  padding-top: 100px;
+}
+.answer {
+  cursor: pointer;
+}
+.question {
+  border-left: 1px solid #66fcf1;
+  padding-left: 25px;
+}
+.next-btn {
+  border: none !important;
+  margin-top: 5px;
+}
+.btn {
+  background-color: #66fcf1;
+}
+.question-number {
+  color: #66fcf1;
+  text-align: center;
+}
+.active {
+  background-color: #66fcf1 !important;
+  color: #1f2833 !important;
+}
