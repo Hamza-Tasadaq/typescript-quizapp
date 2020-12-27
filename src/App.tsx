@@ -49,10 +49,11 @@ const App = () => {
     userAnswers[1]("")
     setIndex(0)
     setAmount(5)
-    setDifficulty("")
+    setDifficulty('easy')
   }
 
   useEffect(() => {
+    console.log("useEffect")
     setIsLoading(true)
     const fetchData = async () => {
       const temp = await fetchQuestions(amount, difficulty)
