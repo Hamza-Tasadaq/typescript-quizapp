@@ -12,9 +12,11 @@ type Props = {
 
 const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, question, answers, userSelection }) => {
     const [isActive, setIsActive] = useState<boolean[]>([false, false, false, false])
+    const [showNext, setShowNext] = useState<boolean>(false)
 
 
     const onClicked = (e: any) => {
+        setShowNext(true)
         userSelection[1](e.target.innerHTML)
         for (let i = 0; i < isActive.length; i++) {
             if (i === +(e.target.id)) {
@@ -29,9 +31,9 @@ const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, 
 
     const next = () => {
         callback()
-
         const temp: boolean[] = [false, false, false, false]
         setIsActive(temp)
+        setShowNext(false)
     }
     return (
         <div className="row quiz-section">
@@ -43,7 +45,7 @@ const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, 
                         {answers.map((answer: string, index: number) => {
                             return (
                                 <>
-                                    <li id={index.toString()} key={answer} value={answer} className={`list-group-item answer ${isActive[index] ? " active" : ""}`} onClick={(e) => onClicked(e)}  >
+                                    <li id={index.toString()} key={index} value={answer} className={`list-group-item answer ${isActive[index] ? " active" : ""}`} onClick={(e) => onClicked(e)}  >
                                         {answer}
                                     </li>
                                 </>
@@ -51,7 +53,7 @@ const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, 
                         })}
                     </ul>
                     <div className="text-right next-btn">
-                        <button type="button" className="btn" onClick={next} >{totalQuestions === currentQuestion ? "Submit" : "Next Quesiton"}</button>
+                        {showNext ? <button type="button" className="btn" onClick={next} >{totalQuestions === currentQuestion ? "Submit" : "Next Quesiton"}</button> : ''}
                     </div>
                 </div>
             </div>
