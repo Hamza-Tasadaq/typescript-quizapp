@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Question.css'
 
 type Props = {
@@ -6,14 +6,32 @@ type Props = {
     currentQuestion: number,
     callback: () => void
     question: string,
-    answers: string[],
-    userSelection: any
+    answers: readonly string[],
+    userSelection: any,
 }
 
 const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, question, answers, userSelection }) => {
-    const [userAnswers, setUserAnswers] = userSelection;
-    const click = (e: any) => {
-        setUserAnswers(e.target.innerHTML)
+    const [isActive, setIsActive] = useState<boolean[]>([false, false, false, false])
+
+
+    const onClicked = (e: any) => {
+        userSelection[1](e.target.innerHTML)
+        for (let i = 0; i < isActive.length; i++) {
+            if (i === +(e.target.id)) {
+                isActive[i] = true
+            }
+            else {
+                isActive[i] = false
+            }
+        }
+        setIsActive(isActive)
+    }
+
+    const next = () => {
+        callback()
+
+        const temp: boolean[] = [false, false, false, false]
+        setIsActive(temp)
     }
     return (
         <div className="row quiz-section">
@@ -22,21 +40,22 @@ const Question: React.FC<Props> = ({ totalQuestions, currentQuestion, callback, 
                 <div className="question">
                     <div className="h2 ">{question}</div>
                     <ul className="list-group">
-                        {answers.map((answer: string) => (
-                            <li key={answer} value={answer} className="list-group-item"   >
-                                <a className="answer" onClick={(e) => click(e)} >
-                                    {answer}
-                                </a>
-                            </li>
-                        ))}
+                        {answers.map((answer: string, index: number) => {
+                            return (
+                                <>
+                                    <li id={index.toString()} key={answer} value={answer} className={`list-group-item answer ${isActive[index] ? " active" : ""}`} onClick={(e) => onClicked(e)}  >
+                                        {answer}
+                                    </li>
+                                </>
+                            )
+                        })}
                     </ul>
                     <div className="text-right next-btn">
-                        <button type="button" className="btn" onClick={callback}>Next Question</button>
+                        <button type="button" className="btn" onClick={next} >{totalQuestions === currentQuestion ? "Submit" : "Next Quesiton"}</button>
                     </div>
                 </div>
             </div>
         </div >
-
     )
 }
 

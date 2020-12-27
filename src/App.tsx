@@ -9,6 +9,7 @@ import Spinner from './components/Spinner/Spinner'
 
 
 const App = () => {
+
   const [questions, setQuestions] = useState<questionType[]>([])
   const [quizStart, setQuizStart] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -16,8 +17,8 @@ const App = () => {
 
   const [score, setScore] = useState<number>(0)
   const userAnswers = useState<string>("")
-  const [index, setIndex] = useState<number>(0)
 
+  const [index, setIndex] = useState<number>(0)
   const [amount, setAmount] = useState<number>(5);
   const [difficulty, setDifficulty] = useState<string>("");
 
@@ -60,6 +61,7 @@ const App = () => {
     }
     fetchData()
   }, [amount, difficulty])
+
   return (
     <div>
       <Header />
