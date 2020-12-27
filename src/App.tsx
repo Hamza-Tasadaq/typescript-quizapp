@@ -53,7 +53,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("useEffect")
     setIsLoading(true)
     const fetchData = async () => {
       const temp = await fetchQuestions(amount, difficulty)
